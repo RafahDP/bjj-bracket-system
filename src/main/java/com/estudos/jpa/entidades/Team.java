@@ -1,5 +1,6 @@
 package com.estudos.jpa.entidades;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

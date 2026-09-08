@@ -12,7 +12,7 @@ public class Category {
     private Long id;
     private String category_name;
     private float max_weight;
-    private float max_age;
+    private int max_age;
     private String belt;
     private String gender;
     // Getters and setters
@@ -36,10 +36,10 @@ public class Category {
     public void setMax_weight(float max_weight){
         this.max_weight = max_weight;
     }
-    public float getMax_age(){
+    public int getMax_age(){
         return max_age;
     }
-    public void setMax_age(float max_age){
+    public void setMax_age(int max_age){
         this.max_age = max_age;
     }
     public String getBelt(){

@@ -19,7 +19,11 @@ public class Athlete{
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
     private int age;
+    private String gender;
     private float weight;
     private String belt;
     //construtors , getters and setters.
@@ -55,6 +59,18 @@ public class Athlete{
     }
     public String getBelt(){
         return this.belt;
+    }
+    public void setGender (String gender){
+        this.gender = gender;
+    }
+    public String getGender(){
+        return this.gender;
+    }
+    public void setCategory(Category category){
+        this.category = category;
+    }
+    public Category getCategory(){
+        return this.category;
     }
 
 }

@@ -9,6 +9,7 @@
         <!-- Classes de entidades atualizadas -->
         <class>com.estudos.jpa.entidades.Athlete</class>
         <class>com.estudos.jpa.entidades.Team</class>
+        <class>com.estudos.jpa.entidades.Category</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
