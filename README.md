@@ -65,7 +65,7 @@ Representa a equipe associada ao atleta.
 
 ### `Category`
 
-Representa uma categoria de competição, com limites de peso e idade, faixa e gênero. A classe já está modelada como entidade, mas ainda não está registrada no arquivo `persistence.xml`.
+Representa uma categoria de competição, com limites de peso e idade, faixa e gênero.
 
 ## Estrutura do projeto
 
@@ -74,7 +74,7 @@ src/
 └── main/
 	├── java/com/estudos/jpa/
 	│   ├── Main.java
-	│   └── entidades/
+	│   └── entities/
 	│       ├── Athlete.java
 	│       ├── Category.java
 	│       └── Team.java
@@ -91,7 +91,7 @@ A unidade de persistência `bjjBracketSystem` está definida em `src/main/resour
 - Transações locais (`RESOURCE_LOCAL`)
 - Logs SQL habilitados para facilitar o estudo do comportamento do Hibernate
 
-As entidades `Athlete` e `Team` estão registradas explicitamente no arquivo de configuração.
+As entidades `Athlete`, `Team` e `Category` estão registradas explicitamente no arquivo de configuração.
 
 ## Boas práticas demonstradas
 
@@ -103,7 +103,6 @@ As entidades `Athlete` e `Team` estão registradas explicitamente no arquivo de 
 
 ## Próximos passos
 
-- Registrar `Category` na unidade de persistência.
 - Criar associações entre atletas e categorias.
 - Adicionar testes automatizados para persistência e relacionamentos.
 - Substituir o H2 por um banco persistente quando o modelo estiver consolidado.

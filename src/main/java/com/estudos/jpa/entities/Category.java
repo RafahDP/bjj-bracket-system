@@ -1,4 +1,4 @@
-package com.estudos.jpa.entidades;
+package com.estudos.jpa.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

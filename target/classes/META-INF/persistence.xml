@@ -6,10 +6,9 @@
     <persistence-unit name="bjjBracketSystem" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
-        <!-- Classes de entidades atualizadas -->
-        <class>com.estudos.jpa.entidades.Athlete</class>
-        <class>com.estudos.jpa.entidades.Team</class>
-        <class>com.estudos.jpa.entidades.Category</class>
+        <class>com.estudos.jpa.entities.Athlete</class>
+        <class>com.estudos.jpa.entities.Team</class>
+        <class>com.estudos.jpa.entities.Category</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>

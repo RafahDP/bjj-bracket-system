@@ -2,9 +2,9 @@ package com.estudos.jpa;
 
 import java.util.List;
 
-import com.estudos.jpa.entidades.Athlete;
-import com.estudos.jpa.entidades.Category;
-import com.estudos.jpa.entidades.Team;
+import com.estudos.jpa.entities.Athlete;
+import com.estudos.jpa.entities.Category;
+import com.estudos.jpa.entities.Team;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
