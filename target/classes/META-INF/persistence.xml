@@ -9,6 +9,7 @@
         <class>com.estudos.jpa.entities.Athlete</class>
         <class>com.estudos.jpa.entities.Team</class>
         <class>com.estudos.jpa.entities.Category</class>
+        <class>com.estudos.jpa.entities.Match</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>

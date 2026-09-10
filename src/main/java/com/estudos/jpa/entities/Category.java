@@ -1,5 +1,6 @@
 package com.estudos.jpa.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -11,7 +12,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Category {
     @OneToMany (mappedBy = "category")
-    private List<Athlete> athletes;
+    private List<Athlete> athletes = new ArrayList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

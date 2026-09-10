@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.estudos.jpa.entities.Athlete;
 import com.estudos.jpa.entities.Category;
+import com.estudos.jpa.entities.Match;
 import com.estudos.jpa.entities.Team;
 
 import jakarta.persistence.EntityManager;
@@ -27,12 +28,13 @@ public class Main{
         category.setMax_age(30);
         category.setMax_weight(94.300f);
         category.setBelt("white");
-         
+        
         em.persist(category);
         Athlete athlete = new Athlete();
         athlete.setName("Rafah");
         athlete.setTeam(team);
         team.getAthletes().add(athlete);
+        category.getAthletes().add(athlete);
         athlete.setAge(20);
         athlete.setWeight(94.30f);
         athlete.setBelt("white");  
@@ -43,6 +45,7 @@ public class Main{
         athlete2.setName("Rafah2");
         athlete2.setTeam(team);
         team.getAthletes().add(athlete2);
+        category.getAthletes().add(athlete2);
         athlete2.setAge(25);
         athlete2.setWeight(94.300f);
         athlete2.setBelt("white");
@@ -51,6 +54,12 @@ public class Main{
 
         em.persist(athlete);
         em.persist(athlete2);
+
+        Match match = new Match();
+        match.setAthlete1(athlete);
+        match.setAthlete2(athlete2);
+        match.setCategory(category);
+        em.persist(match);
 
         em.getTransaction().commit();
 
@@ -65,6 +74,8 @@ public class Main{
         
         Athlete findAthlete = em.find(Athlete.class, 1L);
         Team findTeam = em.find(Team.class,1L);
+        Category findCategory = em.find(Category.class, 1L);
+        Match findMatch = em.find(Match.class,1L);
         // debug
         System.out.println("----Dados Consultados no banco ----");
         System.out.println("Nome: " + findAthlete.getName());
@@ -74,6 +85,8 @@ public class Main{
         System.out.println("Time: " + findAthlete.getTeam().getTeamName());
         System.out.println("Categoria: " + findAthlete.getCategory().getCategory_name());
         System.out.println("Quantidade de atletas na equipe: " + findTeam.getAthletes().size());
+        System.out.println("Atletas na Categoria:"+ findCategory.getAthletes().size());
+        System.out.println("Match encontrado: " + findMatch.getAthlete1().getName() + " vs " + findMatch.getAthlete2().getName() + " na categoria: " + findMatch.getCategory().getCategory_name());
         
         for (int i=0 ; i<2;i++){
             System.out.println("Checando atleta:"+ athletes.get(i).getName());
