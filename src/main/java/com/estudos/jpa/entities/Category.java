@@ -11,7 +11,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Category {
     @OneToMany (mappedBy = "category")
-    private List<Category> category;
+    private List<Athlete> athletes;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -59,10 +59,10 @@ public class Category {
     public void setGender(String gender){
         this.gender = gender;
     }
-    public void setCategory(List<Category> category){
-        this.category = category;
+    public List<Athlete> getAthletes(){
+        return athletes;
     }
-    public List<Category> getCategory(){
-        return category;
+    public void setAthletes(List<Athlete> athletes){
+        this.athletes = athletes;
     }
 }

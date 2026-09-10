@@ -32,6 +32,7 @@ public class Main{
         Athlete athlete = new Athlete();
         athlete.setName("Rafah");
         athlete.setTeam(team);
+        team.getAthletes().add(athlete);
         athlete.setAge(20);
         athlete.setWeight(94.30f);
         athlete.setBelt("white");  
@@ -41,6 +42,7 @@ public class Main{
         Athlete athlete2 = new Athlete();
         athlete2.setName("Rafah2");
         athlete2.setTeam(team);
+        team.getAthletes().add(athlete2);
         athlete2.setAge(25);
         athlete2.setWeight(94.300f);
         athlete2.setBelt("white");
@@ -71,7 +73,7 @@ public class Main{
         System.out.println("Faixa: " + findAthlete.getBelt());
         System.out.println("Time: " + findAthlete.getTeam().getTeamName());
         System.out.println("Categoria: " + findAthlete.getCategory().getCategory_name());
-        System.out.println("Quantidade de atletas na equipe " + findTeam.getAthletes().size());
+        System.out.println("Quantidade de atletas na equipe: " + findTeam.getAthletes().size());
         
         for (int i=0 ; i<2;i++){
             System.out.println("Checando atleta:"+ athletes.get(i).getName());
