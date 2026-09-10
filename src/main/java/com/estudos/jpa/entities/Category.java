@@ -1,12 +1,17 @@
 package com.estudos.jpa.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Category {
+    @OneToMany (mappedBy = "category")
+    private List<Category> category;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,5 +58,11 @@ public class Category {
     }
     public void setGender(String gender){
         this.gender = gender;
+    }
+    public void setCategory(List<Category> category){
+        this.category = category;
+    }
+    public List<Category> getCategory(){
+        return category;
     }
 }

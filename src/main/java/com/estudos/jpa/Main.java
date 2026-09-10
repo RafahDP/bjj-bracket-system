@@ -62,7 +62,7 @@ public class Main{
         System.out.println("dados salvos com sucesso!");
         
         Athlete findAthlete = em.find(Athlete.class, 1L);
-        
+        Team findTeam = em.find(Team.class,1L);
         // debug
         System.out.println("----Dados Consultados no banco ----");
         System.out.println("Nome: " + findAthlete.getName());
@@ -71,6 +71,7 @@ public class Main{
         System.out.println("Faixa: " + findAthlete.getBelt());
         System.out.println("Time: " + findAthlete.getTeam().getTeamName());
         System.out.println("Categoria: " + findAthlete.getCategory().getCategory_name());
+        System.out.println("Quantidade de atletas na equipe " + findTeam.getAthletes().size());
         
         for (int i=0 ; i<2;i++){
             System.out.println("Checando atleta:"+ athletes.get(i).getName());
