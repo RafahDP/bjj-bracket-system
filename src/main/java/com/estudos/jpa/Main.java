@@ -40,6 +40,7 @@ public class Main{
         athlete.setBelt("white");  
         athlete.setGender("male");
         athlete.setCategory(category);
+        athlete.setIsFighting("yes");
 
         Athlete athlete2 = new Athlete();
         athlete2.setName("Rafah2");
@@ -51,6 +52,8 @@ public class Main{
         athlete2.setBelt("white");
         athlete2.setGender("male");
         athlete2.setCategory(category);
+        athlete2.setIsFighting("yes");
+        
 
         em.persist(athlete);
         em.persist(athlete2);
@@ -59,6 +62,8 @@ public class Main{
         match.setAthlete1(athlete);
         match.setAthlete2(athlete2);
         match.setCategory(category);
+        match.setWinner(athlete);
+        match.setMatchStatus("happening");
         em.persist(match);
 
         em.getTransaction().commit();
@@ -87,7 +92,10 @@ public class Main{
         System.out.println("Quantidade de atletas na equipe: " + findTeam.getAthletes().size());
         System.out.println("Atletas na Categoria:"+ findCategory.getAthletes().size());
         System.out.println("Match encontrado: " + findMatch.getAthlete1().getName() + " vs " + findMatch.getAthlete2().getName() + " na categoria: " + findMatch.getCategory().getCategory_name());
-        
+        System.out.println("Status do Match: " + findMatch.getMatchStatus());
+        System.out.println("Vencedor do Match: " + findMatch.getWinner().getName());
+        System.out.println("Atleta:"+ findAthlete.getName()+" está lutando?: " + findAthlete.getIsFighting());
+
         for (int i=0 ; i<2;i++){
             System.out.println("Checando atleta:"+ athletes.get(i).getName());
         }

@@ -1,12 +1,16 @@
 package com.estudos.jpa.entities;
 
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Table(name = "match_tb")
 @Entity 
 public class Match{
     @Id
@@ -22,6 +26,12 @@ public class Match{
     @ManyToOne
     @JoinColumn (name = "category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn (name = "winner_id")
+    private Athlete winner;
+
+    private String matchStatus;
 
     public Match(){}
     public void setAthlete1(Athlete athlete1){
@@ -41,5 +51,17 @@ public class Match{
     }
     public Category getCategory(){
         return category;
+    }
+    public void setWinner(Athlete winner){
+        this.winner = winner;
+    }
+    public Athlete getWinner(){
+        return winner;
+    }
+    public void setMatchStatus(String matchStatus){
+        this.matchStatus = matchStatus;
+    }
+    public String getMatchStatus(){
+        return matchStatus;
     }
 }

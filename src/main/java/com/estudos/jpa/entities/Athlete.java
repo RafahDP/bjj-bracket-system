@@ -26,6 +26,8 @@ public class Athlete{
     private String gender;
     private float weight;
     private String belt;
+    private String isFighting;
+    
     //construtors , getters and setters.
     public Athlete(){}
     public void setName (String name){
@@ -72,5 +74,13 @@ public class Athlete{
     public Category getCategory(){
         return this.category;
     }
+
+    public void setIsFighting(String isFighting){
+        this.isFighting = isFighting;
+    }
+    public String getIsFighting(){
+        return this.isFighting;
+    }
+   
 
 }
