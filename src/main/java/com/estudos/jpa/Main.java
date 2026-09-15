@@ -6,6 +6,10 @@ import com.estudos.jpa.entities.Athlete;
 import com.estudos.jpa.entities.Category;
 import com.estudos.jpa.entities.Match;
 import com.estudos.jpa.entities.Team;
+import com.estudos.jpa.repositories.AthleteRepositories;
+import com.estudos.jpa.repositories.CategoryRepositories;
+import com.estudos.jpa.repositories.MatchRepositories;
+import com.estudos.jpa.repositories.TeamRepositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -20,7 +24,7 @@ public class Main{
         em.getTransaction().begin();
         Team team = new Team();
         team.setTeamName("infight");
-        em.persist(team);
+        
         Category category = new Category();
         category.setCategory_name("Adult-White-Male-Heavy");
         
@@ -29,7 +33,7 @@ public class Main{
         category.setMax_weight(94.300f);
         category.setBelt("white");
         
-        em.persist(category);
+        
         Athlete athlete = new Athlete();
         athlete.setName("Rafah");
         athlete.setTeam(team);
@@ -41,6 +45,7 @@ public class Main{
         athlete.setGender("male");
         athlete.setCategory(category);
         athlete.setIsFighting("yes");
+        
 
         Athlete athlete2 = new Athlete();
         athlete2.setName("Rafah2");
@@ -53,10 +58,6 @@ public class Main{
         athlete2.setGender("male");
         athlete2.setCategory(category);
         athlete2.setIsFighting("yes");
-        
-
-        em.persist(athlete);
-        em.persist(athlete2);
 
         Match match = new Match();
         match.setAthlete1(athlete);
@@ -64,8 +65,30 @@ public class Main{
         match.setCategory(category);
         match.setWinner(athlete);
         match.setMatchStatus("happening");
-        em.persist(match);
+        
 
+        
+
+     
+
+      
+        
+        CategoryRepositories categoryRepository = new CategoryRepositories(em);
+        categoryRepository.saveCategory(category);
+
+        TeamRepositories teamRepository = new TeamRepositories(em);
+        teamRepository.saveTeam(team);
+
+
+        AthleteRepositories athleteRepository = new AthleteRepositories(em);
+        athleteRepository.saveAthlete(athlete);
+        athleteRepository.saveAthlete(athlete2);
+
+        MatchRepositories matchRepository= new MatchRepositories(em);
+        matchRepository.saveMatch(match);
+        
+        
+       
         em.getTransaction().commit();
 
         String jpql = "SELECT a FROM Athlete a WHERE a.belt = :belt";
@@ -74,18 +97,25 @@ public class Main{
             .getResultList();
         System.out.println("Atletas encontrados: " + athletes.size());
 
+        Athlete findAthlete = athleteRepository.findAthlete(1L);
+        Match findMatch = matchRepository.findMatch(1L);
+        Team findTeam = teamRepository.findTeam(1L);
+        Category findCategory= categoryRepository.findCategory(1L);
         
+
+        
+
         System.out.println("dados salvos com sucesso!");
-        
-        Athlete findAthlete = em.find(Athlete.class, 1L);
-        Team findTeam = em.find(Team.class,1L);
-        Category findCategory = em.find(Category.class, 1L);
-        Match findMatch = em.find(Match.class,1L);
+
+       
+
+
+      
         // debug
         System.out.println("----Dados Consultados no banco ----");
         System.out.println("Nome: " + findAthlete.getName());
         System.out.println("Idade: " + findAthlete.getAge());
-        System.out.println("Peso: " + findAthlete.getWeight());
+        System.out.println("Peso: " +findAthlete.getWeight());
         System.out.println("Faixa: " + findAthlete.getBelt());
         System.out.println("Time: " + findAthlete.getTeam().getTeamName());
         System.out.println("Categoria: " + findAthlete.getCategory().getCategory_name());
@@ -94,7 +124,7 @@ public class Main{
         System.out.println("Match encontrado: " + findMatch.getAthlete1().getName() + " vs " + findMatch.getAthlete2().getName() + " na categoria: " + findMatch.getCategory().getCategory_name());
         System.out.println("Status do Match: " + findMatch.getMatchStatus());
         System.out.println("Vencedor do Match: " + findMatch.getWinner().getName());
-        System.out.println("Atleta:"+ findAthlete.getName()+" está lutando?: " + findAthlete.getIsFighting());
+        System.out.println("Atleta:"+ findAthlete.getName()+" está lutando?: " + athleteRepository.findAthlete(1L).getIsFighting());
 
         for (int i=0 ; i<2;i++){
             System.out.println("Checando atleta:"+ athletes.get(i).getName());
