@@ -140,12 +140,6 @@ src/
 - Persistência e recuperação de entidades relacionadas;
 - Configuração de Hibernate e MySQL por `persistence.xml`.
 
-## Próximos passos
-
-- Adicionar testes automatizados para persistência e relacionamentos;
-- Validar se o atleta atende aos limites da categoria antes da inscrição;
-- Criar consultas para listar lutas por categoria ou equipe;
-- Externalizar as credenciais do MySQL em variáveis de ambiente.
 
 ## Licença
 
