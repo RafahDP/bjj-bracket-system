@@ -1,4 +1,4 @@
-# BJJ Bracket System
+# JPA Hibernate Estudos
 
 > Projeto educacional em Java para estudar modelagem de entidades, relacionamentos e persistência com Jakarta Persistence (JPA) e Hibernate.
 
@@ -9,11 +9,11 @@ O projeto simula a preparação de uma chave de competição de Jiu-Jitsu. A apl
 - Uma equipe (`Team`);
 - Uma categoria (`Category`);
 - Dois atletas (`Athlete`) associados à equipe e à categoria;
-- Uma luta (`Match`) entre os dois atletas.
+- Uma luta (`Match`) entre os dois atletas, com vencedor e status.
 
-Depois da persistência, o programa consulta atletas de faixa branca com JPQL, busca as entidades pelo identificador e exibe seus relacionamentos no console.
+Depois da persistência, o programa consulta atletas de faixa branca com JPQL, busca as entidades pelo identificador usando repositórios e exibe seus relacionamentos no console.
 
-Os dados são armazenados em um banco H2 em memória e, portanto, são apagados quando a aplicação é encerrada.
+Os dados são armazenados em um banco MySQL configurado em `persistence.xml`. O Hibernate usa `update`, preservando os dados existentes e atualizando a estrutura das tabelas quando necessário.
 
 ## Tecnologias
 
@@ -21,13 +21,15 @@ Os dados são armazenados em um banco H2 em memória e, portanto, são apagados 
 - Maven
 - Jakarta Persistence 3.0
 - Hibernate ORM 6.6.36.Final
-- H2 Database 2.3.232
+- MySQL Connector/J 9.0.0
 - JUnit Jupiter 5.12.2
 
 ## Pré-requisitos
 
 - JDK 17 ou superior
 - Maven instalado e disponível no `PATH`
+- MySQL Server em execução na porta `3306`
+- Usuário `root` sem senha, conforme a configuração atual
 
 Verifique o ambiente:
 
@@ -35,6 +37,21 @@ Verifique o ambiente:
 java -version
 mvn -version
 ```
+
+## Configuração do banco
+
+A unidade de persistência `bjjBracketSystem` está definida em `src/main/resources/META-INF/persistence.xml` e utiliza:
+
+- MySQL em `127.0.0.1:3306`;
+- banco de dados `bjj`;
+- usuário `root` e senha vazia;
+- `createDatabaseIfNotExist=true`;
+- transações locais (`RESOURCE_LOCAL`);
+- geração/atualização do esquema com `update`;
+- logs SQL formatados e habilitados;
+- registro explícito das entidades `Athlete`, `Team`, `Category` e `Match`.
+
+Para outro ambiente, altere a URL, o usuário, a senha e o dialeto nas propriedades do `persistence.xml`.
 
 ## Como executar
 
@@ -88,7 +105,7 @@ Team 1 -------- N Athlete N -------- 1 Category
 - `Category` -> `Athlete`: `OneToMany` bidirecional;
 - `Athlete` -> `Team`: `ManyToOne`;
 - `Athlete` -> `Category`: `ManyToOne`;
-- `Match` -> `Athlete`: dois relacionamentos `ManyToOne`;
+- `Match` -> `Athlete`: relacionamentos para os dois participantes e para o vencedor;
 - `Match` -> `Category`: `ManyToOne`.
 
 ## Estrutura do projeto
@@ -98,24 +115,19 @@ src/
 └── main/
     ├── java/com/estudos/jpa/
     │   ├── Main.java
-    │   └── entities/
-    │       ├── Athlete.java
-    │       ├── Category.java
-    │       ├── Match.java
-    │       └── Team.java
+    │   ├── entities/
+    │   │   ├── Athlete.java
+    │   │   ├── Category.java
+    │   │   ├── Match.java
+    │   │   └── Team.java
+    │   └── repositories/
+    │       ├── AthleteRepositories.java
+    │       ├── CategoryRepositories.java
+    │       ├── MatchRepositories.java
+    │       └── TeamRepositories.java
     └── resources/META-INF/
         └── persistence.xml
 ```
-
-## Configuração de persistência
-
-A unidade de persistência `bjjBracketSystem` está definida em `src/main/resources/META-INF/persistence.xml` e utiliza:
-
-- H2 em memória: `jdbc:h2:mem:bjj;DB_CLOSE_DELAY=-1`;
-- Transações locais (`RESOURCE_LOCAL`);
-- Geração automática do esquema com `create-drop`;
-- Logs SQL formatados e habilitados;
-- Registro explícito das entidades `Athlete`, `Team`, `Category` e `Match`.
 
 ## Conceitos praticados
 
@@ -126,14 +138,14 @@ A unidade de persistência `bjjBracketSystem` está definida em `src/main/resour
 - Transações com `EntityManager`;
 - Consultas tipadas com JPQL;
 - Persistência e recuperação de entidades relacionadas;
-- Configuração de Hibernate e H2 por `persistence.xml`.
+- Configuração de Hibernate e MySQL por `persistence.xml`.
 
 ## Próximos passos
 
 - Adicionar testes automatizados para persistência e relacionamentos;
 - Validar se o atleta atende aos limites da categoria antes da inscrição;
 - Criar consultas para listar lutas por categoria ou equipe;
-- Substituir o H2 em memória por um banco persistente quando o modelo estiver consolidado.
+- Externalizar as credenciais do MySQL em variáveis de ambiente.
 
 ## Licença
 
